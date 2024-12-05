@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39d40356c24708a499f1be9fd13bc0db, type: 3}
+  m_Name: 256x
+  m_EditorClassIdentifier: 
+  TerrainWidth: 256
+  TerrainLength: 256
+  TerrainHeight: 256
+  StartPosition: {x: -128, y: -64, z: -128}
+  TilesX: 1
+  TilesZ: 1
+  GroupID: 0
+  AutoConnect: 1
+  DrawInstanced: 1
+  PixelError: 5
+  BaseMapDistance: 1000
+  BaseTextureResolution: 1024
+  ControlTextureResolution: 512
+  DetailResolution: 1024
+  DetailResolutionPerPatch: 32
+  MaterialOverride: {fileID: 0}
+  HeightmapResolution: 257
+  EnableHeightmapImport: 1
+  UseGlobalHeightmap: 1
+  HeightmapMode: 0
+  UseRawFile: 1
+  HeightmapWidth: 4096
+  HeightmapHeight: 4096
+  HeightmapRemapMax: 256
+  HeightmapRemapMin: 0
+  HeightmapDepth: 2
+  FlipMode: 2
+  BatchHeightmapFolder: 
+  GlobalHeightmapPath: C:/Users/Ian/Desktop/UnityProjects/FishingCapstonePrototype/Assets/Terrain/MountainLake/Height.raw
+  TileHeightmapPaths: []
+  EnableGizmo: 0
+  EditGizmoBounds: 0
+  TerrainAssetDirectory: Assets/Terrain/
+  EnableGuid: 1
+  EnableClearExistingData: 0
+  EnableLightingAutoBake: 0
+  PresetPath: 
+  ShowGroupSettings: 1
+  ShowHeightmapSettings: 1
+  ShowGizmoSettings: 0
+  ShowOptions: 1
