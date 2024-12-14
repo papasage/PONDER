@@ -600,7 +600,7 @@ public class BoidBehavior : MonoBehaviour
         if (!boid.isLure && !boid.isHooked && foodScore < foodScoreMax)
         {
             foodScore++;
-            sizeMultiplier += .5f;
+            sizeMultiplier += .15f;
             SetSize(sizeMultiplier);
         }
 
@@ -960,7 +960,7 @@ public class BoidBehavior : MonoBehaviour
     {
         float elapsedTime = 0f;
 
-        while (elapsedTime < (hungryInSeconds * sizeMultiplier))
+        while (elapsedTime < (hungryInSeconds + foodScore))
         {
             elapsedTime += Time.deltaTime;
             yield return null;

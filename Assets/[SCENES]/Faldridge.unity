@@ -13181,6 +13181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652788367470}
   - component: {fileID: 621627791}
+  - component: {fileID: 919132148866742997}
   m_Layer: 0
   m_Name: Chruulian_v01 (1)
   m_TagString: Untagged
@@ -13188,6 +13189,29 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!136 &919132148866742997
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148866742996}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.96
+  m_Height: 4.38
+  m_Direction: 1
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &963319565654593458
 GameObject:
   m_ObjectHideFlags: 0
@@ -13939,6 +13963,10 @@ PrefabInstance:
     - target: {fileID: 1131208144997972203, guid: f14a8fcc732629e45bf8ecd4819fe8a1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1587308579956071953, guid: f14a8fcc732629e45bf8ecd4819fe8a1, type: 3}
+      propertyPath: field of view
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 2356451663831789639, guid: f14a8fcc732629e45bf8ecd4819fe8a1, type: 3}
       propertyPath: m_AnchorMax.y

@@ -205,9 +205,9 @@ MonoBehaviour:
   m_HorizontalAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 100
+    m_MaxSpeed: 125
     m_AccelTime: 0.1
-    m_DecelTime: 0.1
+    m_DecelTime: 0.05
     m_InputAxisName: RightStickX
     m_InputAxisValue: 0
     m_InvertInput: 0
@@ -241,8 +241,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_NoiseProfile: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
   m_PivotOffset: {x: 0, y: 0, z: 0}
-  m_AmplitudeGain: 1
-  m_FrequencyGain: 1
+  m_AmplitudeGain: 0.75
+  m_FrequencyGain: 0.75
   mNoiseOffsets: {x: 575.90436, y: -20.0578, z: -497.01657}
 --- !u!1 &3454096304956944333
 GameObject:
@@ -515,7 +515,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 1596016862883234991}
   m_Follow: {fileID: 4376962371097458726}
   m_Lens:
-    FieldOfView: 80
+    FieldOfView: 90
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
