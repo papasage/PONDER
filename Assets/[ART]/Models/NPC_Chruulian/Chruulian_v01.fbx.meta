@@ -18,7 +18,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Chruulian_Mouth
-    second: {fileID: 2100000, guid: dacdcb69a292b2f4eb741ec95c73b8cf, type: 2}
+    second: {fileID: 2100000, guid: 23cf0272877fc75469726b7092aff10a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
