@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//This script goes on the character model that is nested inside of the prefab. A parent object will control this along with equipping clothes
 public class FacialAnimator : MonoBehaviour
 {
     Renderer renderer;

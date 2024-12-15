@@ -13924,6 +13924,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1102269667924492798, guid: f14a8fcc732629e45bf8ecd4819fe8a1, type: 3}
+      propertyPath: weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1102269667924492798, guid: f14a8fcc732629e45bf8ecd4819fe8a1, type: 3}
+      propertyPath: isGlobal
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1131208144997972203, guid: f14a8fcc732629e45bf8ecd4819fe8a1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

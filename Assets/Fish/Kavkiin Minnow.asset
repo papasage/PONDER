@@ -25,8 +25,8 @@ MonoBehaviour:
   foodScore: 0
   foodScoreMax: 4
   scoreDifferenceThreshold: 0
-  minSizeMultiplier: 0.81
-  maxSizeMultiplier: 1.2
+  minSizeMultiplier: 0.5
+  maxSizeMultiplier: 0.8
   hungerWeight: 1
   hungryInSeconds: 30
   biteRange: 2.5

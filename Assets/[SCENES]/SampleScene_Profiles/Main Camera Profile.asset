@@ -18,29 +18,29 @@ MonoBehaviour:
     value: 1
   UsesFixedResolution:
     overrideState: 1
-    value: 1
+    value: 0
   PixelScale:
-    overrideState: 0
-    value: 4
+    overrideState: 1
+    value: 3
   FixedVerticalResolution:
     overrideState: 1
-    value: 296
+    value: 480
   ColorDepth:
     overrideState: 1
-    value: 0.037
+    value: 0.034
   DitherPattern:
     overrideState: 1
-    value: {fileID: 2800000, guid: fd3fc319873bd5346875483dde02fcf7, type: 3}
+    value: {fileID: 2800000, guid: be72dee3d0af07340abb0bba594a9998, type: 3}
     defaultState: 0
   DitherPatternScale:
     overrideState: 1
     value: 1
   DitherThreshold:
     overrideState: 1
-    value: 0.369
+    value: 0.131
   DitherIntensity:
     overrideState: 1
-    value: 0.218
+    value: 1
 --- !u!114 &-590887380244206099
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -62,10 +62,10 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.44
+    value: 1
   color:
-    overrideState: 0
-    value: {r: 0, g: 0, b: 0, a: 1}
+    overrideState: 1
+    value: {r: 0, g: 0.0754717, b: 0, a: 1}
   ambientOnly:
     overrideState: 0
     value: 1
@@ -80,10 +80,10 @@ MonoBehaviour:
     value: -12
   thicknessModifier:
     overrideState: 1
-    value: 1.4
+    value: 1.83
   zBias:
     overrideState: 1
-    value: 0.00001
+    value: 0.001
   directLightingStrength:
     overrideState: 0
     value: 0
