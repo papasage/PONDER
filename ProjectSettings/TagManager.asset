@@ -8,6 +8,7 @@ TagManager:
   - Fish
   - Food
   - Terrain
+  - LookTarget
   layers:
   - Default
   - TransparentFX

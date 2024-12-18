@@ -1,40 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class HeadLookAt : MonoBehaviour
 {
-    public GameObject headBone;
-    Quaternion startingRotation;
     bool isLooking;
-    GameObject lookTarget;
-
+    Vector3 startPosition;
+    Vector3 targetPosition;
+    GameObject targetObject;
+    [SerializeField] GameObject lookTarget; //This is an object in the prefab hiarchy that controls where the character looks. 
+    [SerializeField] Rig lookRig;
+    [SerializeField] float trackingSpeed;
     void Start()
     {
-        startingRotation = headBone.transform.rotation;
+        startPosition = lookTarget.transform.position;
     }
 
-    void LateUpdate()
+    void Update()
     {
-        if (isLooking)
+        if(targetObject != null)
         {
-            headBone.transform.LookAt(lookTarget.transform.position);
+            targetPosition = targetObject.transform.position;
+        }
+
+        if (isLooking && lookTarget.transform.position != targetPosition)
+        {
+            lookTarget.transform.position = Vector3.Lerp(lookTarget.transform.position, targetPosition, Time.deltaTime * trackingSpeed);
+        }
+        if (!isLooking && lookTarget.transform.position != startPosition)
+        {
+            lookTarget.transform.position = Vector3.Lerp(lookTarget.transform.position, startPosition, Time.deltaTime * trackingSpeed);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the object entering the trigger has a CharacterController component
-        CharacterController characterController = other.GetComponent<CharacterController>();
-
-        Debug.Log("Collision");
-
-        // If a CharacterController component is found, log a message
-        if (characterController != null)
+        if (other.CompareTag("Player"))
         {
-            Debug.Log("Player Found");
+            Transform target = other.transform.Find("PlayerCameraSocket");
+            targetObject = target.gameObject;
             isLooking = true;
-            lookTarget = other.gameObject;
         }
     }
 
@@ -48,6 +54,7 @@ public class HeadLookAt : MonoBehaviour
         {
             Debug.Log("Player Lost");
             isLooking = false;
+            targetObject = null;
         }
     }
 }

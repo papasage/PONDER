@@ -2272,6 +2272,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 835114077109266381, guid: d6651fe07b4363645b2e9443f3e02607, type: 3}
   m_PrefabInstance: {fileID: 1167492307}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &348191680
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 348191681}
+  m_Layer: 0
+  m_Name: LookTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &348191681
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348191680}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.010166842, y: 0.00000011920314, z: 0.0000000012119816, w: 0.9999483}
+  m_LocalPosition: {x: 0, y: 0, z: 1.52}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1187985296}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &365625680 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 835114077109266381, guid: d6651fe07b4363645b2e9443f3e02607, type: 3}
@@ -2482,6 +2513,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6758347060435754246, guid: 8020182e09283c1438c51f84ffe9635f, type: 3}
       insertIndex: 1
       addedObject: {fileID: 1731199698}
+    - targetCorrespondingSourceObject: {fileID: 8954778416468793509, guid: 8020182e09283c1438c51f84ffe9635f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 348191681}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8437226223531949721, guid: 8020182e09283c1438c51f84ffe9635f, type: 3}
       insertIndex: 2
@@ -6580,8 +6614,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.97814566, y: 1, z: 0.97753185}
+  m_Center: {x: 0.0109274145, y: 0, z: -0.0112337805}
 --- !u!23 &1052180985
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7083,11 +7117,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c38acfe6a33be40be5c5749868f6f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lookWeight: 0
+  lookTarget: {fileID: 348191680}
   lookRig: {fileID: 1731199696}
-  headConstraint: {fileID: 1731199697}
-  headBone: {fileID: 1187985295}
-  isLooking: 0
-  lookSpeed: 10
 --- !u!114 &1166032719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7103,7 +7135,15 @@ MonoBehaviour:
   m_RigLayers:
   - m_Rig: {fileID: 1731199696}
     m_Active: 1
-  m_Effectors: []
+  m_Effectors:
+  - m_Transform: {fileID: 348191681}
+    m_Style:
+      shape: {fileID: 4300000, guid: e050c2b16fe384bd994474655a4b4968, type: 2}
+      color: {r: 1, g: 0, b: 0, a: 0.5}
+      size: 0.2
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    m_Visible: 1
 --- !u!1001 &1167492307
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7267,11 +7307,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 47db91c6e6f30964ab082f26411629b6, type: 3}
   m_PrefabInstance: {fileID: 1173493126}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1187985295 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3250255972091802982, guid: 8020182e09283c1438c51f84ffe9635f, type: 3}
-  m_PrefabInstance: {fileID: 389408733}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1187985296 stripped
 Transform:
@@ -10616,7 +10651,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Weight: 1
-  m_Effectors: []
+  m_Effectors:
+  - m_Transform: {fileID: 1731199698}
+    m_Style:
+      shape: {fileID: 4300000, guid: e050c2b16fe384bd994474655a4b4968, type: 2}
+      color: {r: 1, g: 0, b: 0, a: 0.5}
+      size: 0.2
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0}
+    m_Visible: 0
 --- !u!114 &1731199697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10633,10 +10676,10 @@ MonoBehaviour:
   m_Data:
     m_ConstrainedObject: {fileID: 1187985296}
     m_SourceObjects:
-      m_Length: 0
+      m_Length: 1
       m_Item0:
-        transform: {fileID: 0}
-        weight: 0
+        transform: {fileID: 348191681}
+        weight: 1
       m_Item1:
         transform: {fileID: 0}
         weight: 0
@@ -10659,8 +10702,8 @@ MonoBehaviour:
         transform: {fileID: 0}
         weight: 0
     m_Offset: {x: 0, y: 0, z: 0}
-    m_MinLimit: -180
-    m_MaxLimit: 180
+    m_MinLimit: -100
+    m_MaxLimit: 100
     m_AimAxis: 4
     m_UpAxis: 2
     m_WorldUpType: 0
