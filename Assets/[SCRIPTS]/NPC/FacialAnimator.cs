@@ -5,7 +5,7 @@ using UnityEngine;
 //This script goes on the character model that is nested inside of the prefab. A parent object will control this along with equipping clothes
 public class FacialAnimator : MonoBehaviour
 {
-    Renderer renderer;
+    Renderer matRenderer;
     Material eyeMat;
     Material mouthMat;
     public Eyes currentEyes;
@@ -39,9 +39,9 @@ public class FacialAnimator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<Renderer>();
-        eyeMat = renderer.materials[1];
-        mouthMat = renderer.materials[2];
+        matRenderer = GetComponent<Renderer>();
+        eyeMat = matRenderer.materials[1];
+        mouthMat = matRenderer.materials[2];
     }
 
     // Update is called once per frame
