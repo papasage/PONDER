@@ -59,9 +59,10 @@ public class PlayerController : MonoBehaviour
         {
             PlayerMovement();
 
-            if (Input.GetButtonDown("A") && groundedPlayer)
+            if (Input.GetButtonDown("A"))
             {
-                PlayerJump();
+                Debug.Log("PlayerController Interacted!");
+                //PlayerJump();
             }
         }
 
