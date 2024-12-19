@@ -72,7 +72,7 @@ public class GameStateMachine : StateMachine
     {
         if (rodSpawnerReady)
         {
-            UIController.instance.UpdateXButtonText("EQUIP ROD");
+            UIController.instance.UpdateButtonSprite("X", UIController.EquipmentIcon.RodSprite);
 
             //EQUIP THE FISHING ROD
             if (Input.GetButtonDown("X"))
@@ -82,8 +82,8 @@ public class GameStateMachine : StateMachine
                 rodSpawnerReady = false;
                 tackleMenuReady = false;
 
-                UIController.instance.UpdateXButtonText("UNEQUIP ROD");
-                UIController.instance.UpdateYButtonText(" ");
+                UIController.instance.UpdateButtonSprite("X", UIController.EquipmentIcon.RodUsedSprite);
+                UIController.instance.UpdateButtonSprite("Y", UIController.EquipmentIcon.nullSprite);
 
                 StartCoroutine(UIController.instance.CastingTipCoroutine());
                 PlayerController.instance.playerMovementLocked = true;
@@ -126,12 +126,12 @@ public class GameStateMachine : StateMachine
 
             if (UIController.instance.tackleMode == false)
             {
-                UIController.instance.UpdateYButtonText("OPEN TACKLE");
+                UIController.instance.UpdateButtonSprite("Y", UIController.EquipmentIcon.TackleSprite);
             }
             else
             {
-                UIController.instance.UpdateYButtonText("CLOSE TACKLE");
-                UIController.instance.UpdateXButtonText(" ");
+                UIController.instance.UpdateButtonSprite("Y", UIController.EquipmentIcon.TackleUsedSprite);
+                UIController.instance.UpdateButtonSprite("X", UIController.EquipmentIcon.nullSprite);
             }
         }
 

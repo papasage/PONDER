@@ -255,7 +255,7 @@ public class FishingRod : MonoBehaviour
         inputManager.canReel = true;
 
         vcam.SetActive(true);
-        UIController.instance.UpdateYButtonText("CHANGE CAMERA");
+        UIController.instance.UpdateButtonSprite("Y", UIController.EquipmentIcon.CameraSprite);
         cameraToggleReady = true;
     }
     public void ToggleCamera()
@@ -549,6 +549,6 @@ public class FishingRod : MonoBehaviour
 
     void OnDestroy()
     {
-        UIController.instance.UpdateYButtonText(" ");
+        UIController.instance.UpdateButtonSprite("X", UIController.EquipmentIcon.nullSprite);
     }
 }

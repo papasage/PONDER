@@ -16,16 +16,27 @@ public class UIController : MonoBehaviour
 
     [Header("Button UI")]
     [SerializeField] GameObject ButtonHUD;
-    [SerializeField] TMP_Text Xtext;
-    [SerializeField] TMP_Text Ytext;
-    [SerializeField] Image Xicon;
-    [SerializeField] Image Yicon;
+    
+    [SerializeField] Image Xicon; //button icon
+    [SerializeField] Image Yicon; //button icon
+    [SerializeField] Image Aicon; //button icon
+    
     [SerializeField] Sprite RodSprite;
     [SerializeField] Sprite RodUsedSprite;
     [SerializeField] Sprite TackleSprite;
     [SerializeField] Sprite TackleUsedSprite;
     [SerializeField] Sprite CameraSprite;
     [SerializeField] Sprite nullSprite;
+
+    public enum EquipmentIcon
+    {
+        RodSprite,
+        RodUsedSprite,
+        TackleSprite,
+        TackleUsedSprite,
+        CameraSprite,
+        nullSprite
+    }
 
     [Header("Fishing Line Tension Data")]
     public bool rodIsEquipped;
@@ -47,7 +58,6 @@ public class UIController : MonoBehaviour
     [SerializeField] Color lerpedColor;
     [SerializeField] public Color colorHealthMax;
     [SerializeField] public Color colorHealthDepleated;
-    [SerializeField] GameObject UI_ReelBarFishIcon;
 
     [Header("Cast Charging Bar")]
     [SerializeField] public GameObject ChargeBarWindow;
@@ -60,8 +70,6 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject debugMenu;
     [SerializeField] TMP_Text UIBoidCountText;
     private List<GameObject> boids;
-    [SerializeField] TMP_Text UIStateText;
-    [SerializeField] Image UIStateSprite;
 
     [Header("Journal Menu")]
     public bool diaryMode = false;
@@ -145,7 +153,6 @@ public class UIController : MonoBehaviour
     {
         UnsubscribeFromEvents();
     }
-
     private void Awake()
     {
         if (instance == null)
@@ -157,16 +164,11 @@ public class UIController : MonoBehaviour
             // Destroy duplicate instance
             Destroy(gameObject);
         }
-        // Initialize UIController
-        Initialize();
-
-        UI_ReelBarFishIcon = GameObject.Find("ReelBarFishIcon");
     }
     private void Start()
     {
         UpdateBoidCount();
     }
-
     private void Update()
     {
         //CalculateLineData();
@@ -178,39 +180,12 @@ public class UIController : MonoBehaviour
             lineDistance.value = Mathf.Lerp(lineDistance.value,RodToBobber.maxDistance,t);
             t += 0.02f * Time.deltaTime;
         }
-
-        if (currentRod != null)
-        {
-            //CalculateLineLength();
-            if (currentRod.RTBLineSnapped || currentRod.BTHLineSnapped)
-            {
-                if (UI_ReelBarFishIcon != null)
-                {
-                    SetProgressBarFishIcon(false);
-                }
-                    
-            }
-        }
         else
         {
-            if (UI_ReelBarFishIcon != null)
-            {
-                SetProgressBarFishIcon(false);
-            }
-
             lineDistance.value = 0f;
         }
 
     }
-
-    private void Initialize()
-    {
-        // Initialize UIController here
-        UI_ReelBarFishIcon = GameObject.Find("ReelBarFishIcon");
-    }
-
-
-
     void UpdateBoidCount()
     {
         //boids = new List<GameObject>(GameObject.FindObjectsOfType<BoidBehavior>().Select(boid => boid.gameObject));
@@ -231,30 +206,21 @@ public class UIController : MonoBehaviour
         //Debug.Log("Boids Initialized! Found Boids: " + boids.Count);
         UIBoidCountText.text = UICount.ToString();
     }
-
     public void UpdateGoldCount(int amount)
     {
         UIGoldCountText.text = amount.ToString();
     }
-
     void UIIdle()
     {
-        UIStateText.text = "Idle";
     }
     void UICasting()
     {
-        UIStateText.text = "Casting";
     }
     void UICasted()
-    {
-        UIStateText.text = "Casted";
-        
+    {  
     }
     void UIBite()
     {
-        UIStateText.text = "Bite";
-        SetProgressBarFishIcon(true);
-
         // Check if the UIController instance is null
         if (instance != null)
         {
@@ -269,23 +235,16 @@ public class UIController : MonoBehaviour
     }
     void UIReeling()
     {
-        UIStateText.text = "Reeling";
     }
     void UILanding()
     {
-        UIStateText.text = "Landing";
-        SetProgressBarFishIcon(false);
-        //ToggleReelProgressBar();
     }
     void UIFighting()
     {
-        UIStateText.text = "Caught!";
     }
     void UIScoring()
     {
-        UIStateText.text = "Shop";
     }
-
     void CalculateLineData()
     {
         if (rodIsEquipped)
@@ -370,7 +329,7 @@ public class UIController : MonoBehaviour
 
             // Ensure the percentage is between 0 and 1
             healthPercentage = Mathf.Clamp01(healthPercentage);
-            Debug.Log("LINE HEALTH: " + healthPercentage);
+            //Debug.Log("LINE HEALTH: " + healthPercentage);
 
             if(healthPercentage < .25f && currentRod.isCasted)
             {
@@ -399,39 +358,79 @@ public class UIController : MonoBehaviour
         UI_GoldWindow.SetActive(status);
     }
 
-    public void UpdateYButtonText(string text)
+    public void UpdateButtonSprite(string button, EquipmentIcon sprite)
     {
-        if(text == "CHANGE CAMERA")
+        if (button == "X")
         {
-            Yicon.sprite = CameraSprite;
+            switch (sprite)
+            {
+                case EquipmentIcon.RodSprite:
+                    Xicon.sprite = RodSprite;
+                    break;
+                case EquipmentIcon.RodUsedSprite:
+                    Xicon.sprite = RodUsedSprite;
+                    break;
+                case EquipmentIcon.TackleSprite:
+                    Xicon.sprite = TackleSprite;
+                    break;
+                case EquipmentIcon.TackleUsedSprite:
+                    Xicon.sprite = TackleUsedSprite;
+                    break;
+                case EquipmentIcon.CameraSprite:
+                    Xicon.sprite = CameraSprite;
+                    break;
+                case EquipmentIcon.nullSprite:
+                    Xicon.sprite = nullSprite;
+                    break;
+            }
         }
-        if(text == "OPEN TACKLE")
+        if (button == "Y")
         {
-            Yicon.sprite = TackleSprite;
+            switch (sprite)
+            {
+                case EquipmentIcon.RodSprite:
+                    Yicon.sprite = RodSprite;
+                    break;
+                case EquipmentIcon.RodUsedSprite:
+                    Yicon.sprite = RodUsedSprite;
+                    break;
+                case EquipmentIcon.TackleSprite:
+                    Yicon.sprite = TackleSprite;
+                    break;
+                case EquipmentIcon.TackleUsedSprite:
+                    Yicon.sprite = TackleUsedSprite;
+                    break;
+                case EquipmentIcon.CameraSprite:
+                    Yicon.sprite = CameraSprite;
+                    break;
+                case EquipmentIcon.nullSprite:
+                    Yicon.sprite = nullSprite;
+                    break;
+            }
         }
-        if(text == "CLOSE TACKLE")
+        if (button == "A")
         {
-            Yicon.sprite = TackleUsedSprite;
-        }
-        if(text == " ")
-        {
-            Yicon.sprite = nullSprite;
-        }
-    }
-    
-    public void UpdateXButtonText(string text)
-    {
-        if(text == "EQUIP ROD")
-        {
-            Xicon.sprite = RodSprite;
-        }
-        if (text == "UNEQUIP ROD")
-        {
-            Xicon.sprite = RodUsedSprite;
-        }
-        if (text == " ")
-        {
-            Xicon.sprite = nullSprite;
+            switch (sprite)
+            {
+                case EquipmentIcon.RodSprite:
+                    Aicon.sprite = RodSprite;
+                    break;
+                case EquipmentIcon.RodUsedSprite:
+                    Aicon.sprite = RodUsedSprite;
+                    break;
+                case EquipmentIcon.TackleSprite:
+                    Aicon.sprite = TackleSprite;
+                    break;
+                case EquipmentIcon.TackleUsedSprite:
+                    Aicon.sprite = TackleUsedSprite;
+                    break;
+                case EquipmentIcon.CameraSprite:
+                    Aicon.sprite = CameraSprite;
+                    break;
+                case EquipmentIcon.nullSprite:
+                    Aicon.sprite = nullSprite;
+                    break;
+            }
         }
     }
 
@@ -444,15 +443,6 @@ public class UIController : MonoBehaviour
     public void SetCastWindow(bool status)
     {
         ChargeBarWindow.SetActive(status);
-    }
-    
-    public void SetProgressBarFishIcon(bool status)
-    {
-        if (UI_ReelBarFishIcon != null)
-        {
-            UI_ReelBarFishIcon.SetActive(status);
-        }
-        else Debug.Log("UI_ReelBarFishIcon not found.");
     }
 
     public void ToggleDebugMenu()
@@ -482,7 +472,7 @@ public class UIController : MonoBehaviour
         tackleMode = !tackleMode;
         UI_TackleWindow.SetActive(tackleMode);
         SetGoldHUD(tackleMode);
-        UIController.instance.ToggleDiaryMenu();
+        ToggleDiaryMenu();
 
         if (tackleMode)
         {
