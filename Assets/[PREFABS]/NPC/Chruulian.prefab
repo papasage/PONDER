@@ -1787,7 +1787,7 @@ GameObject:
   - component: {fileID: 6028632306661024382}
   - component: {fileID: 7307916360497197905}
   - component: {fileID: 4754639993370642165}
-  - component: {fileID: 2674237617637002776}
+  - component: {fileID: 4909840150519341105}
   - component: {fileID: 9123382368337731220}
   m_Layer: 0
   m_Name: Chruulian
@@ -1875,8 +1875,8 @@ CapsuleCollider:
   m_Height: 4.38
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
---- !u!65 &2674237617637002776
-BoxCollider:
+--- !u!135 &4909840150519341105
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1894,8 +1894,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2.75, z: 0}
+  m_Radius: 8.66
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &9123382368337731220
 MonoBehaviour:
   m_ObjectHideFlags: 0
