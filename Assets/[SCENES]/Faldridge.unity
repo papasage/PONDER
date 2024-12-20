@@ -13283,6 +13283,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogueText
       objectReference: {fileID: 0}
+    - target: {fileID: 7410728385147817494, guid: f14a8fcc732629e45bf8ecd4819fe8a1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7515288173446607778, guid: f14a8fcc732629e45bf8ecd4819fe8a1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -13297,6 +13301,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7515288173446607778, guid: f14a8fcc732629e45bf8ecd4819fe8a1, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8282759993300702503, guid: f14a8fcc732629e45bf8ecd4819fe8a1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8282759993300702503, guid: f14a8fcc732629e45bf8ecd4819fe8a1, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8282759993300702503, guid: f14a8fcc732629e45bf8ecd4819fe8a1, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8282759993300702503, guid: f14a8fcc732629e45bf8ecd4819fe8a1, type: 3}
+      propertyPath: m_MatchWidthOrHeight
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
