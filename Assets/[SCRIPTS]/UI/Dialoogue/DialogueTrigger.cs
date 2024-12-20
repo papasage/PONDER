@@ -42,6 +42,7 @@ public class DialogueTrigger : MonoBehaviour
         if (currentIndex >= 0 && currentIndex < lines.Length && isSpeaking)
         {
             faceAnimator.currentEyes = lines[currentIndex].eyes;
+            faceAnimator.SetMouthRandom();
             Debug.Log("Eyes Set" + currentIndex);
         }
         if (currentIndex == -1)
@@ -49,6 +50,11 @@ public class DialogueTrigger : MonoBehaviour
             faceAnimator.currentEyes = faceAnimator.defaultEyes;
             faceAnimator.currentMouth = faceAnimator.defaultMouth;
         }
+        if (currentIndex == -2)
+        {
+            faceAnimator.currentMouth = faceAnimator.defaultMouth;
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)

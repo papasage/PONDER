@@ -72,8 +72,17 @@ public class DialogueManager: MonoBehaviour
         foreach (char c in lines[index].DialogueText.ToCharArray())
         {
             dialogueText.text += c;
+
+            OnDialogueIndexChanged?.Invoke(index);
+
             AudioManager.instance.DialogueScroll();
             yield return new WaitForSeconds(lines[index].textSpeed);
+
+            if (dialogueText.text == lines[index].DialogueText)
+            {
+                OnDialogueIndexChanged?.Invoke(-2); //Reset Only Mouth
+            }
+
         }
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 //This script goes on the character model that is nested inside of the prefab. A parent object will control this along with equipping clothes
 public class FacialAnimator : MonoBehaviour
@@ -167,5 +168,17 @@ public class FacialAnimator : MonoBehaviour
 
         SetEyes(lastEyes);
         isBlinking = false;
-    }    
+    }
+
+    public void SetMouthRandom()
+    {
+        // Get all values of the Mouth enum
+        Array mouthValues = Enum.GetValues(typeof(Mouth));
+
+        // Pick a random value from the enum
+        Mouth randomMouth = (Mouth)mouthValues.GetValue(UnityEngine.Random.Range(0, mouthValues.Length));
+
+        // Set the currentMouth to the randomly chosen value
+        currentMouth = randomMouth;
+    }
 }
