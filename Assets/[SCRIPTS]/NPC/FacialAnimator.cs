@@ -16,6 +16,9 @@ public class FacialAnimator : MonoBehaviour
     private float blinkTimer;
     private bool isBlinking = false;
 
+    public Eyes defaultEyes;
+    public Mouth defaultMouth;
+
     public enum Eyes 
     {
         Content,  //1,1.6758
@@ -62,7 +65,7 @@ public class FacialAnimator : MonoBehaviour
         Blinking();
     }
 
-    void SetEyes(Eyes mode)
+    public void SetEyes(Eyes mode)
     {
         float xOffset = 1;
         float yOffset = 1;
@@ -95,7 +98,7 @@ public class FacialAnimator : MonoBehaviour
 
         eyeMat.mainTextureOffset = new Vector2(xOffset, yOffset);
     }
-    void SetMouth(Mouth mode)
+    public void SetMouth(Mouth mode)
     {
         float xOffset = 1;
         float yOffset = 1;

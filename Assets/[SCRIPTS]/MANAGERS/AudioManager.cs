@@ -37,6 +37,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] public AudioClip uiMove;
     [SerializeField] public AudioClip fishSaved;
     [SerializeField] public AudioClip fishSold;
+    [SerializeField] public AudioClip uiDialogueScroll;
 
     [Header("RodFX Clips")]
     [SerializeField] public AudioClip rodReel;
@@ -254,6 +255,11 @@ public class AudioManager : MonoBehaviour
     public void FishSold()
     {
         PlayUISound(fishSold);
+    }
+    public void DialogueScroll()
+    {
+        PlayUISound(uiDialogueScroll);
+        //PlayRandomlyPitchedSound(uiDialogueScroll);
     }
 
     //---------------------------------------------------SFX------
