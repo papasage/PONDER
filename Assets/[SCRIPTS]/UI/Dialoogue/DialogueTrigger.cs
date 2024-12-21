@@ -11,7 +11,6 @@ public class DialogueTrigger : MonoBehaviour
     public DialogueLineScriptableObject[] lines;
     FacialAnimator faceAnimator;
     bool isSpeaking;
-    DialogueManager dManager;
 
     private void Start()
     {
@@ -22,7 +21,6 @@ public class DialogueTrigger : MonoBehaviour
         if (DialogueManager.instance != null)
         {
             DialogueManager.instance.OnDialogueIndexChanged += UpdateFaceAnimation;
-            Debug.Log("Subscribed to OnDialogueIndexChanged in Awake");
         }
     }
     private void OnDestroy()
@@ -31,19 +29,16 @@ public class DialogueTrigger : MonoBehaviour
         if (DialogueManager.instance != null)
         {
             DialogueManager.instance.OnDialogueIndexChanged -= UpdateFaceAnimation;
-            Debug.Log("Unsubscribed from OnDialogueIndexChanged in OnDestroy");
         }
     }
 
     private void UpdateFaceAnimation(int currentIndex)
     {
-        Debug.Log("Dialogue index changed to: " + currentIndex);
 
         if (currentIndex >= 0 && currentIndex < lines.Length && isSpeaking)
         {
             faceAnimator.currentEyes = lines[currentIndex].eyes;
             faceAnimator.SetMouthRandom();
-            Debug.Log("Eyes Set" + currentIndex);
         }
         if (currentIndex == -1)
         {

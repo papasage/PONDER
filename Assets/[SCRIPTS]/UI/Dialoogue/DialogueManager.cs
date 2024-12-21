@@ -10,7 +10,7 @@ public class DialogueManager: MonoBehaviour
     public TextMeshProUGUI actorNameText;
     public TextMeshProUGUI dialogueText;
     public GameObject dialogueObject;
-    public DialogueLineScriptableObject[] lines;
+    [HideInInspector] public DialogueLineScriptableObject[] lines;
 
     public int index; //tracking where we are in our conversation typing sequence
 
@@ -28,6 +28,8 @@ public class DialogueManager: MonoBehaviour
 
     private void Update()
     {
+        if (lines == null || lines.Length == 0) return;
+
         if (Input.GetButtonDown("A"))
         {
             if (dialogueText.text == lines[index].DialogueText) //if the current line is done typing
@@ -49,8 +51,6 @@ public class DialogueManager: MonoBehaviour
         index = 0;
         actorNameText.text = lines[index].actorName;
 
-        Debug.Log("Starting dialogue with index: " + index);
-
         OnDialogueIndexChanged?.Invoke(index); // Notify listeners that dialogue has started
         StartCoroutine(TypeLine());
     }
@@ -58,11 +58,16 @@ public class DialogueManager: MonoBehaviour
     public void StopDialogue()
     {
         StopAllCoroutines(); //stop typing
-        dialogueText.text = lines[index].DialogueText; //set the line to the finished line
+
+        if (lines != null && lines.Length > 0)
+        {
+            dialogueText.text = lines[index].DialogueText; //set the line to the finished line
+        }
+        
         dialogueObject.SetActive(false);
         index = 0;
 
-        Debug.Log("Stopping dialogue with index: " + index);
+        lines = null;
 
         OnDialogueIndexChanged?.Invoke(-1); // Notify listeners that dialogue has stopped
     }
@@ -88,19 +93,20 @@ public class DialogueManager: MonoBehaviour
 
     void NextLine()
     {
+        if (lines == null || index >= lines.Length - 1)
+        {
+            StopDialogue();
+            return;
+        }
+
         if (index < lines.Length - 1)
         {
             index++;
+            actorNameText.text = lines[index].actorName;
             dialogueText.text = string.Empty;
-
-            Debug.Log("Advancing to next line with index: " + index);
 
             OnDialogueIndexChanged?.Invoke(index); // Notify listeners of index change
             StartCoroutine(TypeLine());
-        }
-        else
-        {
-            StopDialogue();
         }
     }
 }
