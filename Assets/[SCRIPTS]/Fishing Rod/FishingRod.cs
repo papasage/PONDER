@@ -119,12 +119,10 @@ public class FishingRod : MonoBehaviour
             if(!ParryManager.instance.parryManagerReady)
             {
                 ParryFail(reelForce * 20);
-                parryReady = false;
             }
             if (ParryManager.instance.parryManagerReady)
             {
                 ParryReel(reelForce * 30);
-                parryReady = false;
             }       
         }
 
@@ -289,7 +287,7 @@ public class FishingRod : MonoBehaviour
             CalculateLineTension(); // calc damage
         }
     }
-    void ParryReel(float strength)
+    public void ParryReel(float strength)
     {
         AudioManager.instance.Parry();
         UIController.instance.ComboFlash();
@@ -301,9 +299,11 @@ public class FishingRod : MonoBehaviour
         {
             rodToBobberString.maxDistance -= strength;
         }
+        parryReady = false;
+        ParryManager.instance.LoopParry();
     }
 
-    void ParryFail(float strength)
+    public void ParryFail(float strength)
     {
         AudioManager.instance.ParryFail();
         ParryManager.instance.StopParry();
@@ -311,6 +311,8 @@ public class FishingRod : MonoBehaviour
         {
             rodToBobberString.maxDistance += strength;
         }
+        parryReady = false;
+        ParryManager.instance.LoopParry();
     }
     public void Catch(BoidBehavior caught)
     {
@@ -537,14 +539,18 @@ public class FishingRod : MonoBehaviour
     {
         float elapsedTime = 0f;
 
-        while (elapsedTime < 1.5f * hookedFish?.GetComponent<BoidBehavior>()?.foodScore)
+        while (hookedFish != null && !hookedFish.Equals(null) && elapsedTime < 1.5f * (hookedFish.GetComponent<BoidBehavior>()?.foodScore ?? 0f))
         {
             elapsedTime += Time.deltaTime;
+            Debug.Log("ParryCountdown:" + elapsedTime + "out of" + 1.5f * hookedFish.GetComponent<BoidBehavior>()?.foodScore);
             yield return null;
         }
-        
-        ParryManager.instance.PromptParry();
-        //StartCoroutine(ParryCountdown());
+
+        // Ensure hookedFish is still valid before prompting a parry
+        if (hookedFish != null && !hookedFish.Equals(null))
+        {
+            ParryManager.instance.PromptParry();
+        }
     }
 
     void OnDestroy()

@@ -485,26 +485,14 @@ public class UIController : MonoBehaviour
             GameStateMachine.instance.rodSpawnerReady = true;
         }
     }
-    public void SetCaughtMenu(bool status)
-    {
-        UI_TackleWindow.SetActive(caughtMode);
-    }
-    public void SetCaughtComboPopUp(bool status)
-    {
-        UI_TackleWindow.SetActive(status);
-    }
 
-    public void ToggleCastTip()
-    {
-        castTipMode = !castTipMode;
-        UI_CastPrompt.SetActive(castTipMode);
-    }
 
     public void ComboFlash()
     {
         GetComponent<PlayableDirector>().Play();
     }
 
+    //Triggered in UIController (this) during UIBite();
     IEnumerator ReelingTipCoroutine()
     {
         if (!reelTipOccured)
@@ -522,6 +510,7 @@ public class UIController : MonoBehaviour
             equipBlock = false;
         }
     }
+    // Triggered in UIController (this) when the line health drops below 25%
     IEnumerator LineHealthTipCoroutine()
     {
         if (!lineHealthTipOccured)
@@ -549,6 +538,8 @@ public class UIController : MonoBehaviour
             reelBlock = false;
         }
     }
+
+    // Triggered in GameStateMachine when the fishing rod is equipped
     public IEnumerator CastingTipCoroutine()
     {
         if (!castTipOccured)
@@ -568,6 +559,8 @@ public class UIController : MonoBehaviour
             reelBlock = false;
         }
     }
+
+    //Triggered by a volume on the dock
     public IEnumerator EquipTipCoroutine()
     {
         if (!equipTipOccured)
@@ -579,6 +572,8 @@ public class UIController : MonoBehaviour
             UI_EquipPrompt.SetActive(false);
         }
     } 
+
+    //Triggered when the FishingRod starts the Parry
     public IEnumerator ParryTipCoroutine()
     {
         if (!parryTipOccured)
