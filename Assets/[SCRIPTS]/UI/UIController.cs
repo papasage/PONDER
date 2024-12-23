@@ -16,11 +16,11 @@ public class UIController : MonoBehaviour
 
     [Header("Button UI")]
     [SerializeField] GameObject ButtonHUD;
-    
+
     [SerializeField] Image Xicon; //button icon
     [SerializeField] Image Yicon; //button icon
     [SerializeField] Image Aicon; //button icon
-    
+
     [SerializeField] Sprite RodSprite;
     [SerializeField] Sprite RodUsedSprite;
     [SerializeField] Sprite TackleSprite;
@@ -58,6 +58,8 @@ public class UIController : MonoBehaviour
     [SerializeField] Color lerpedColor;
     [SerializeField] public Color colorHealthMax;
     [SerializeField] public Color colorHealthDepleated;
+    [SerializeField] GameObject FishComboStack;
+    private List<GameObject> fishStackList = new List<GameObject>();
 
     [Header("Cast Charging Bar")]
     [SerializeField] public GameObject ChargeBarWindow;
@@ -95,6 +97,7 @@ public class UIController : MonoBehaviour
     public bool equipBlock = false;
     public bool reelBlock = false;
     public bool castTipMode = false;
+    public bool gameplayTipsEnabled = false;
 
     public bool castTipOccured = false;
     [SerializeField] GameObject UI_CastPrompt;
@@ -471,6 +474,7 @@ public class UIController : MonoBehaviour
     {
         tackleMode = !tackleMode;
         UI_TackleWindow.SetActive(tackleMode);
+
         SetGoldHUD(tackleMode);
         ToggleDiaryMenu();
 
@@ -492,10 +496,31 @@ public class UIController : MonoBehaviour
         GetComponent<PlayableDirector>().Play();
     }
 
+    public void ComboChainMeter(Sprite icon)
+    {
+        GameObject fishComboStackSprite = new GameObject("fishComboStackSprite", typeof(Image));
+        fishComboStackSprite.transform.SetParent(FishComboStack.transform, false);
+        fishComboStackSprite.GetComponent<Image>().sprite = icon;
+        fishComboStackSprite.transform.localScale = new Vector3(2, 2, 2);
+        fishStackList.Add(fishComboStackSprite);
+    }
+
+    public void ClearOutComboChainMeter()
+    {
+        // Iterate through the list and destroy each game object
+        foreach (GameObject fishComboSprite in fishStackList)
+        {
+            Destroy(fishComboSprite);
+        }
+
+        // Clear the list
+        fishStackList.Clear();
+    }
+
     //Triggered in UIController (this) during UIBite();
     IEnumerator ReelingTipCoroutine()
     {
-        if (!reelTipOccured)
+        if (!reelTipOccured && gameplayTipsEnabled)
         {
             equipBlock = true;
             yield return new WaitForSecondsRealtime(.5f);
@@ -513,7 +538,7 @@ public class UIController : MonoBehaviour
     // Triggered in UIController (this) when the line health drops below 25%
     IEnumerator LineHealthTipCoroutine()
     {
-        if (!lineHealthTipOccured)
+        if (!lineHealthTipOccured && gameplayTipsEnabled)
         {
             UI_LineHealthPrompt.SetActive(true);
             lineHealthTipOccured = true;
@@ -542,7 +567,7 @@ public class UIController : MonoBehaviour
     // Triggered in GameStateMachine when the fishing rod is equipped
     public IEnumerator CastingTipCoroutine()
     {
-        if (!castTipOccured)
+        if (!castTipOccured && gameplayTipsEnabled)
         {
             equipBlock = true;
             reelBlock = true;
@@ -563,7 +588,7 @@ public class UIController : MonoBehaviour
     //Triggered by a volume on the dock
     public IEnumerator EquipTipCoroutine()
     {
-        if (!equipTipOccured)
+        if (!equipTipOccured && gameplayTipsEnabled)
         {
             UI_EquipPrompt.SetActive(true);
             equipTipOccured = true;
@@ -576,7 +601,7 @@ public class UIController : MonoBehaviour
     //Triggered when the FishingRod starts the Parry
     public IEnumerator ParryTipCoroutine()
     {
-        if (!parryTipOccured)
+        if (!parryTipOccured && gameplayTipsEnabled)
         {
             UI_ParryPrompt.SetActive(true);
             parryTipOccured = true;

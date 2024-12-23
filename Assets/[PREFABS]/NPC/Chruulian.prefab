@@ -2099,6 +2099,8 @@ MonoBehaviour:
   currentMouth: 0
   blinkInterval: 5
   blinkDuration: 0.2
+  defaultEyes: 0
+  defaultMouth: 0
 --- !u!1 &9190893904639689152
 GameObject:
   m_ObjectHideFlags: 0

@@ -250,6 +250,7 @@ MonoBehaviour:
   favoriteSong: null
   luckyNumber: 0
   sketch: {fileID: 0}
+  timeCaught: 
 --- !u!1 &4751844855845049991
 GameObject:
   m_ObjectHideFlags: 0

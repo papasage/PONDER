@@ -617,6 +617,7 @@ public class BoidBehavior : MonoBehaviour
             
             Debug.Log("COMBO! x" + comboMeter);
             UIController.instance.ComboFlash();
+            UIController.instance.ComboChainMeter(sketch);
             CinemachineShake.Instance.ShakeCamera(10f * comboMeter, .33f);
             HitStop.instance.Stop(0.33f);
         }

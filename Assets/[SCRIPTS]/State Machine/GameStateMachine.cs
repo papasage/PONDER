@@ -220,7 +220,7 @@ public class GameStateMachine : StateMachine
         UI_CaughtPrompt.SetActive(true);
         UIController.instance.SetGoldHUD(true);
 
-
+        UIController.instance.ClearOutComboChainMeter();
 
         GameObject.Find("CaughtData_Breed").GetComponent<TMP_Text>().text = caughtFish.maidenName;
         //GameObject.Find("CaughtData_Size").GetComponent<TMP_Text>().text = caughtFish.sizeMultiplier.ToString("F2");
