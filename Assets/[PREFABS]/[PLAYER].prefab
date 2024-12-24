@@ -130,7 +130,7 @@ Transform:
   m_GameObject: {fileID: 2502302880126498052}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.0830002, z: 2.3440018}
+  m_LocalPosition: {x: 0, y: -1.0830002, z: 3.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -618,6 +618,7 @@ MonoBehaviour:
   waterLevel: {fileID: 0}
   groundedPlayer: 0
   playerMovementLocked: 0
+  playerInteractLocked: 0
   playerSpeed: 10
   jumpHeight: 3
   gravityValue: -9.81
@@ -660,8 +661,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionPoint: {fileID: 2308988218991293700}
-  interactionPointRadius: 3.5
-  marker: {fileID: 3070270402717954267}
+  interactionRadius: 5
+  marker: {fileID: 7730604571738025613}
+  markerSpeed: 5
 --- !u!1001 &7534803809874383962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -722,5 +724,10 @@ PrefabInstance:
 --- !u!4 &3070270402717954267 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4758838671089902721, guid: 1ca8833fef5c1a44e8535613eb67c7dc, type: 3}
+  m_PrefabInstance: {fileID: 7534803809874383962}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7730604571738025613 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 277428510294162135, guid: 1ca8833fef5c1a44e8535613eb67c7dc, type: 3}
   m_PrefabInstance: {fileID: 7534803809874383962}
   m_PrefabAsset: {fileID: 0}

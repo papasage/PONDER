@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private float playerRotationY;
 
     public bool playerMovementLocked = false;
+    public bool playerInteractLocked = false; //this is for interacting with new things. Not menu navigation or dialogue
 
     [SerializeField] private float playerSpeed = 2.0f;
     [SerializeField] private float jumpHeight = 1.0f;
@@ -59,11 +60,8 @@ public class PlayerController : MonoBehaviour
         {
             PlayerMovement();
 
-            if (Input.GetButtonDown("A"))
-            {
-                Debug.Log("PlayerController Interacted!");
-                //PlayerJump();
-            }
+            //PRESSING A TO INTERACT IS DONE INSIDE OF Interactor.cs!!
+
         }
 
     }

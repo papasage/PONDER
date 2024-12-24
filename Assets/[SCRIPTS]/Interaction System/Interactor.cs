@@ -1,77 +1,72 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Interactor : MonoBehaviour
 {
     [SerializeField] private Transform interactionPoint;
-    [SerializeField] private float interactionPointRadius = 5f;
-    [SerializeField] private Transform marker;
-
-    private readonly List<Collider> interactables = new List<Collider>();
-    private Collider nearestInteractable;
+    [SerializeField] private float interactionRadius = 5f;
+    private IInteractable currentInteractable;
+    [SerializeField] GameObject marker;
+    [SerializeField] float markerSpeed = 5f;
     private Vector3 markerDefaultPosition;
+    private Vector3 markerTargetPosition;
 
     private void Start()
     {
-        markerDefaultPosition = marker.position;
+        markerDefaultPosition = marker.transform.position;
     }
 
     private void Update()
     {
-        FindNearestInteractable();
-        UpdateMarkerPosition();
+        if (PlayerController.instance.playerInteractLocked)
+    {
+        return; // Skip interaction logic if player interaction is locked
+    }
+        DetectInteractable();
+        MoveMarker();
+
+        if (currentInteractable != null && Input.GetButtonDown("A") && !PlayerController.instance.playerInteractLocked)
+        {
+            currentInteractable.Interact();
+        }
     }
 
-    private void FindNearestInteractable()
-    {
-        nearestInteractable = null;
-        float closestDistanceSqr = Mathf.Infinity;
 
-        foreach (var interactable in interactables)
+    //When Interactor is looking for an interactable:
+    //It is looking for CAPSULECOLLIDERS only. This is to avoid 
+    //interacting with an NPC's SphereCollider that tells it to look at the player.
+
+    private void DetectInteractable()
+    {
+        Collider[] hits = Physics.OverlapSphere(interactionPoint.position, interactionRadius);
+        currentInteractable = null;
+
+        foreach (var hit in hits)
         {
-            if (interactable != null) // Ensure the interactable is still valid
+            if (hit is CapsuleCollider && hit.TryGetComponent<IInteractable>(out var interactable))
             {
-                float distanceSqr = (interactable.transform.position - interactionPoint.position).sqrMagnitude;
-                if (distanceSqr < closestDistanceSqr)
-                {
-                    closestDistanceSqr = distanceSqr;
-                    nearestInteractable = interactable;
-                }
+                currentInteractable = interactable;
+
+
+                markerTargetPosition = hit.transform.position;
+                break; // Prioritize the first interactable found
             }
         }
-    }
 
-    private void UpdateMarkerPosition()
-    {
-        if (nearestInteractable != null)
+        if(currentInteractable == null)
         {
-            Vector3 targetPosition = nearestInteractable.transform.position;
-            marker.position = Vector3.Lerp(marker.position, targetPosition, Time.deltaTime * 5f);
-        }
-        else
-        {
-            // Return the marker to its default position
-            marker.position = Vector3.Lerp(marker.position, markerDefaultPosition, Time.deltaTime * 5f);
+            markerTargetPosition = markerDefaultPosition;
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void MoveMarker()
     {
-        if (other.TryGetComponent<IInteractable>(out _)) // Check if the object implements IInteractable
-        {
-            interactables.Add(other);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        interactables.Remove(other);
+        marker.transform.position = Vector3.Lerp(marker.transform.position, markerTargetPosition, Time.deltaTime * markerSpeed);
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(interactionPoint.position, interactionPointRadius);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(interactionPoint.position, interactionRadius);
     }
 }

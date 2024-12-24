@@ -6,7 +6,7 @@ using UnityEngine;
 //Fill the lines[] array with DialogueLineScriptableObjects within the inspector
 //This script will pass the lines to the dialogue manager when activated
 
-public class DialogueTrigger : MonoBehaviour
+public class DialogueTrigger : MonoBehaviour, IInteractable
 {
     public DialogueLineScriptableObject[] lines;
     FacialAnimator faceAnimator;
@@ -52,15 +52,23 @@ public class DialogueTrigger : MonoBehaviour
 
     }
 
+    public void Interact()
+    {
+        PlayerController.instance.playerInteractLocked = true;
+        SendDialogueToManager();
+        isSpeaking = true;
+        DialogueManager.instance?.StartDialogue();
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            SendDialogueToManager();
-            isSpeaking = true;
-            DialogueManager.instance.StartDialogue();
+
         }
     }
+
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))

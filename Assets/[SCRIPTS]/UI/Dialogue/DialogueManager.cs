@@ -12,6 +12,8 @@ public class DialogueManager: MonoBehaviour
     public GameObject dialogueObject;
     [HideInInspector] public DialogueLineScriptableObject[] lines;
 
+    private bool dialogueScrollIsReady = false;
+
     public int index; //tracking where we are in our conversation typing sequence
 
     // Event to notify listeners when the dialogue index changes
@@ -30,22 +32,39 @@ public class DialogueManager: MonoBehaviour
     {
         if (lines == null || lines.Length == 0) return;
 
-        if (Input.GetButtonDown("A"))
+
+        //for some reason, this if statment is going through even though playerInteractLocked is true. 
+        //debugging looks like it is becoming true too late to stop this if statement.
+        //if I can find a way to stop this if statment from firing during the first interact, then our dialogue system is almost done. 
+
+        if (PlayerController.instance.playerInteractLocked && dialogueScrollIsReady)
         {
-            if (dialogueText.text == lines[index].DialogueText) //if the current line is done typing
+            if (Input.GetButtonDown("A"))
             {
-                NextLine(); //next line
-            }
-            else //if the line is not done
-            {
-                StopAllCoroutines(); //stop typing
-                dialogueText.text = lines[index].DialogueText; //set the line to the finished line
+                Debug.Log("Input received, playerInteractLocked: " + PlayerController.instance.playerInteractLocked);
+                if (dialogueText.text == lines[index].DialogueText) //if the current line is done typing
+                {
+                    NextLine(); //next line
+                }
+                else //if the line is not done
+                {
+                    StopAllCoroutines(); //stop typing
+                    dialogueText.text = lines[index].DialogueText; //set the line to the finished line
+                }
             }
         }
     }
 
+    public bool IsDialogueActive()
+    {
+        return dialogueObject.activeSelf;
+    }
+
     public void StartDialogue()
     {
+        StartCoroutine(SetInteractionLock());
+
+        Debug.Log("Dialogue started. playerInteractLocked: " + PlayerController.instance.playerInteractLocked);
         dialogueObject.SetActive(true);
         dialogueText.text = string.Empty;
         index = 0;
@@ -70,6 +89,8 @@ public class DialogueManager: MonoBehaviour
         lines = null;
 
         OnDialogueIndexChanged?.Invoke(-1); // Notify listeners that dialogue has stopped
+        PlayerController.instance.playerInteractLocked = false;
+        dialogueScrollIsReady = false;
     }
 
     IEnumerator TypeLine()
@@ -108,5 +129,12 @@ public class DialogueManager: MonoBehaviour
             OnDialogueIndexChanged?.Invoke(index); // Notify listeners of index change
             StartCoroutine(TypeLine());
         }
+    }
+
+    IEnumerator SetInteractionLock()
+    {
+        yield return new WaitForSeconds(0.1f);
+        PlayerController.instance.playerInteractLocked = true;
+        dialogueScrollIsReady = true;
     }
 }
