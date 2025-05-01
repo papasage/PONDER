@@ -661,7 +661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionPoint: {fileID: 2308988218991293700}
-  interactionRadius: 5
+  interactionRadius: 2
   marker: {fileID: 7730604571738025613}
   markerSpeed: 5
 --- !u!1001 &7534803809874383962
@@ -675,6 +675,18 @@ PrefabInstance:
     - target: {fileID: 277428510294162135, guid: 1ca8833fef5c1a44e8535613eb67c7dc, type: 3}
       propertyPath: m_Name
       value: interactionMarker
+      objectReference: {fileID: 0}
+    - target: {fileID: 277428510294162135, guid: 1ca8833fef5c1a44e8535613eb67c7dc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 339160758553201788, guid: 1ca8833fef5c1a44e8535613eb67c7dc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2284464764434214313, guid: 1ca8833fef5c1a44e8535613eb67c7dc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4758838671089902721, guid: 1ca8833fef5c1a44e8535613eb67c7dc, type: 3}
       propertyPath: m_LocalPosition.x
